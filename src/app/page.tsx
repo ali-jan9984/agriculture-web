@@ -3,7 +3,9 @@ import Navbar from "@/components/Navbar";
 import ImageWithText from "@/components/ImageWithText";
 import ProductCat from "@/components/ProductCat";
 import Footer from "@/components/Footer";
-import SuggestionPage from "@/components/Suggestions";
+import AboutPage from "@/components/About";
+import ContactSection from "@/components/Contact";
+import ServicesPage from "@/components/Services";
 
 export default function Home() {
   return (
@@ -11,8 +13,10 @@ export default function Home() {
       <Navbar/>
       <Hero/>
       <ProductCat/>
+      <ServicesPage/>
+      <AboutPage/>
       <ImageWithText/>
-     <SuggestionPage/>
+      <ContactSection/>
      <Footer/>
     </div>
   );

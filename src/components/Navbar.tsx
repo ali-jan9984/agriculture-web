@@ -16,29 +16,31 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
+  // Smooth scroll handler
+  const scrollToSection = (id) => {
+    setOpen(false); // Close mobile menu on click
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
+  // Nav links now target section IDs instead of href URLs
   const navLinks = [
-    { label: "Home", href: "/", icon: <FaHome /> },
+    { label: "Home", id: "home", icon: <FaHome /> },
     {
       label: "Product Categories",
-      href: "/productcat",
+      id: "productcat",
       icon: <FaLeaf />,
       dropdown: [
-        { label: "Seeds", icon: <GiSeedling />, href: "/productcat/seed" },
-        {
-          label: "Medicines",
-          icon: <GiMedicines />,
-          href: "/productcat/medicines",
-        },
-        {
-          label: "Fertilizers",
-          icon: <GiFertilizerBag />,
-          href: "/productcat/fertilizers",
-        },
+        { label: "Seeds", id: "seed", icon: <GiSeedling /> },
+        { label: "Medicines", id: "medicines", icon: <GiMedicines /> },
+        { label: "Fertilizers", id: "fertilizers", icon: <GiFertilizerBag /> },
       ],
     },
-    { label: "Contact", href: "/contact", icon: <FaPhoneAlt /> },
-    { label: "About", href: "/about", icon: <FaInfoCircle /> },
-    { label: "Services", href: "/services", icon: <FaServicestack /> },
+    { label: "Contact", id: "contact", icon: <FaPhoneAlt /> },
+    { label: "About", id: "about", icon: <FaInfoCircle /> },
+    { label: "Services", id: "services", icon: <FaServicestack /> },
   ];
 
   return (
@@ -89,28 +91,28 @@ const Navbar = () => {
                       className="absolute top-10 left-0 bg-white border rounded-lg shadow-xl p-2 w-48 z-40"
                     >
                       {link.dropdown.map((item, index) => (
-                        <a
-                          href={item.href}
+                        <button
                           key={index}
-                          className="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100 transition"
+                          onClick={() => scrollToSection(item.id)}
+                          className="flex items-center gap-2 px-3 py-2 rounded hover:bg-gray-100 transition w-full text-left"
                         >
                           {item.icon} {item.label}
-                        </a>
+                        </button>
                       ))}
                     </motion.div>
                   )}
                 </AnimatePresence>
               </div>
             ) : (
-              <a
-                href={link.href}
+              <button
                 key={i}
+                onClick={() => scrollToSection(link.id)}
                 className="flex items-center gap-1 text-black hover:text-red-800 transition-all duration-200 relative group"
               >
                 {link.icon}
                 {link.label}
                 <span className="absolute bottom-0 left-0 h-[2px] w-0 bg-black group-hover:w-full transition-all" />
-              </a>
+              </button>
             )
           )}
           {/* WhatsApp Button */}
@@ -148,25 +150,25 @@ const Navbar = () => {
                       </summary>
                       <div className="pl-6 mt-2">
                         {link.dropdown.map((item, index) => (
-                          <a
+                          <button
                             key={index}
-                            href={item.href}
-                            className="flex items-center gap-2 py-1 text-sm text-gray-700 hover:text-black"
+                            onClick={() => scrollToSection(item.id)}
+                            className="flex items-center gap-2 py-1 text-sm text-gray-700 hover:text-black w-full text-left"
                           >
                             {item.icon} {item.label}
-                          </a>
+                          </button>
                         ))}
                       </div>
                     </details>
                   </div>
                 ) : (
-                  <a
+                  <button
                     key={i}
-                    href={link.href}
+                    onClick={() => scrollToSection(link.id)}
                     className="flex items-center gap-2 text-black"
                   >
                     {link.icon} {link.label}
-                  </a>
+                  </button>
                 )
               )}
               <a
